@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Abstractions.Contracts
 {
-    public class Message : ICommand
+    public abstract record Message : ICommand
     {
 
         public DateTimeOffset Timestamp { get; private set; } = DateTimeOffset.Now;

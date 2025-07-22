@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="Modules\BankAccounts\CommandHandlers\" />
-    <Folder Include="Modules\BankAccounts\QueryHandlers\" />
+    <Folder Include="Modules\Accounts\QueryHandlers\" />
     <Folder Include="Modules\Budgets\CommandHandlers\" />
     <Folder Include="Modules\Budgets\QueryHandlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>
