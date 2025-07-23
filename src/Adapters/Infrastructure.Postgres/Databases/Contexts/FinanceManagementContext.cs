@@ -6,11 +6,6 @@ using Domain.Modules.Budgets.Aggregates;
 using Domain.Modules.Budgets.ValuesObjects.Categories;
 using Domain.Modules.Budgets.ValuesObjects.Transactions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Postgres.Databases.Contexts
 {
@@ -25,15 +20,11 @@ namespace Infrastructure.Postgres.Databases.Contexts
 
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<Transaction> Transactions { get; set; }
-
         #endregion
 
         #region Budget
 
         public DbSet<Budget> Budget { get; set; }
-
-        public DbSet<Category> Categories { get; set; }
 
         #endregion
 

@@ -19,7 +19,7 @@ namespace Domain.Modules.Budgets.Aggregates
 
         public decimal TotalValue { get; private set; }
 
-        public Category Category { get; private set; }
+        //public Category Category { get; private set; }
 
         public IEnumerable<Category> Categories => _categories.AsReadOnly();
 

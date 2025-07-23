@@ -19,6 +19,12 @@ namespace Infrastructure.Postgres.Databases.Configurations.Budgets
 
             builder.HasKey(budget => budget.Id);
 
+            builder.Property(prop => prop.ReferencePeriod)
+                .HasConversion(
+                    dateOnly => DateTime.SpecifyKind(dateOnly.ToDateTime(TimeOnly.MinValue), DateTimeKind.Utc),
+                    dateTime => DateOnly.FromDateTime(dateTime)
+                );
+
             builder.OwnsMany(
                 budget => budget.Categories,
                 budgetNavigationBuilder =>
@@ -26,6 +32,7 @@ namespace Infrastructure.Postgres.Databases.Configurations.Budgets
                     budgetNavigationBuilder.ToTable(nameof(Category));
                     budgetNavigationBuilder.Property<int>("Id").IsRequired();
                     budgetNavigationBuilder.HasKey("Id");
+                    budgetNavigationBuilder.WithOwner().HasForeignKey("BudgetId");
 
                     budgetNavigationBuilder.OwnsMany(
                         account => account.Transactions,
@@ -34,6 +41,7 @@ namespace Infrastructure.Postgres.Databases.Configurations.Budgets
                             transactionNavigationBuilder.ToTable(nameof(Transaction));
                             transactionNavigationBuilder.Property<int>("Id").IsRequired();
                             transactionNavigationBuilder.HasKey("Id");
+                            transactionNavigationBuilder.WithOwner().HasForeignKey("CategoryId");
                         }
                     );
                 }

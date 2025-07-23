@@ -11,7 +11,7 @@ namespace Application.Contracts
     public static class Command
     {
 
-        public record AddCategoryCommand(Category category)
+        public record AddCategoryCommand(Guid BudgetId, Category category)
         : Message, ICommand;
 
         public record CreateAccountCommand(string FirstName, string LastName, string Email)

@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Ports.Repositories;
 using Domain.Abstractions.Aggregates;
+using Infrastructure.Postgres.Databases.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace Infrastructure.Postgres.Databases
     public class FinanceManagementRepository : IFinanceManagementRepository
     {
 
-        private readonly DbContext _context;
+        private readonly FinanceManagementContext _context;
 
-        public FinanceManagementRepository(DbContext context)
+        public FinanceManagementRepository(FinanceManagementContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
