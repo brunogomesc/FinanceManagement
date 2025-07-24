@@ -1,10 +1,33 @@
 using Application;
+using Application.Contracts;
 using Infrastructure.Postgres;
-using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.IdentityModel.Tokens;
 using WebApi.Transformers;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.Authority = jwtSettings.Authority;
+    options.RequireHttpsMetadata = jwtSettings.RequireHttpsMetadata;
+
+    options.TokenValidationParameters = new TokenValidationParameters {
+        ValidateIssuer = true,
+        ValidIssuer = jwtSettings.ValidIssuer,
+        ValidateAudience = true,
+        ValidAudiences = jwtSettings.ValidAudiences,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+});
 
 builder.Host
     .UseDefaultServiceProvider((context, provider) =>

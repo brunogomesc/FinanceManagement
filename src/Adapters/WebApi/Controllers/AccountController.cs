@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Ports.Handlers;
 using Application.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -7,6 +8,7 @@ namespace WebApi.Controllers
 
     [Route("/api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController : Controller
     {
         [HttpPost]
